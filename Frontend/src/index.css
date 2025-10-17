@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* 🎨 Custom Color Variables */
+:root {
+  --primary-600: #00897B;
+  --primary-500: #009688;
+  --primary-50: #E0F2F1;
+}
+
+/* 🧱 Global body styling using @apply */
+
+body {
+   min-height: 100vh; 
+  background-image: linear-gradient(to bottom, white, var(--primary-50)); 
+  display: flex; 
+  flex-direction: column; 
+}
+
+
+/* ✨ Image hover effect */
+.hero-img {
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+.hero-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 💫 Button hover effect */
+.soft-btn {
+  transition: all 0.3s ease;
+}
+.soft-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
