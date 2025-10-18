@@ -33,13 +33,13 @@ const Body = () => {
         </button>
       </a>
 
-      <a href="/signin/admin">
+      <Link to="/timetable/admin">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-gray-800 focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-700"
         >
           Login as Admin
         </button>
-      </a>
+      </Link>
     </div>
 
     </div>

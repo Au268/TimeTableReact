@@ -47,7 +47,7 @@ const Table = ({lect,room}) => {
                                 </td>
                             )
                             i+= lec.slots-1
-                            time+=lec.slots-1
+                            time += parseFloat(0.5*(lect.slots-1))
                         }else{
                             cells.push(
                                 <td className="border px-2 sm:px-3 py-2 bg-gray-100 border-dashed text-gray-400 text-center" key={i}>

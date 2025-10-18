@@ -1,51 +1,41 @@
-import React from 'react'
-
-const Form = () => {
-  return (
+import React, { useEffect, useState } from 'react'
+import fetchLectures from '../../api/fetchAdminLectureApi';
+const Form = ({setLect,setRoom,day,setDay}) => {
     
-    <form
-    //  action="/timetable/admin" method="POST"
-    >
+      useEffect(() => {
+    fetchLectures(setLect, setRoom, day);
+  }, [day]);
+
+  const handleChange=(e)=>{
+    setDay(e.target.value)
+  }
+  return (
+    <form>
       <div className="mb-6">
         <label for="daySelect" className="mr-2 font-medium text-gray-700">Select Day:</label>
-        <select id="daySelect" name="day"
-          className="px-3 py-2 border rounded-md focus:ring-2 focus:ring-[var(--primary-500)]"
-        //   onchange="this.form.submit()"
-          >
-          <option value="" 
-        //   <%=selectedDay==="none" ?"selected":"" %>
-          >
+        <select id="daySelect" name="day" className="px-3 py-2 border rounded-md focus:ring-2 focus:ring-[var(--primary-500)]" onChange={handleChange}>
+          <option value="">
             --Select Day--
           </option>
-          <option value="monday" 
-        //   <%=selectedDay==="monday" ?"selected":"" %>
-          >
+          <option value="monday">
             Monday
           </option>
-          <option value="tuesday" 
-        //   <%=selectedDay==="tuesday" ?"selected":"" %>
-          >
+          <option value="tuesday">
             Tuesday
           </option>
-          <option value="wednesday" 
-        //   <%=selectedDay==="wednesday" ?"selected":"" %>
-          >
+          <option value="wednesday">
             Wednesday
           </option>
-          <option value="thursday"
-        //    <%=selectedDay==="thursday" ?"selected":"" %>
-           >
+          <option value="thursday">
             Thursday
           </option>
-          <option value="friday" 
-        //   <%=selectedDay==="friday" ?"selected":"" %>
-          >
+          <option value="friday">
             Friday
           </option>
         </select>
       </div>
     </form>
-    
+     
   )
 }
 

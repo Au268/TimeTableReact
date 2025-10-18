@@ -8,14 +8,16 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
+      <Route path='/' element={<Dashboard/>} />
       <Route path='/dashboard' element={<Dashboard/>} />
       <Route path='/timetable/student' element={<Timetable/>}/>
+      <Route path='/timetable/admin' element={<AdminTimetable/>}/>
     </Routes>
     </BrowserRouter>
 
 
 
-    // <AdminTimetable/>
+
 
   )
 }
