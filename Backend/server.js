@@ -1,14 +1,24 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.get("/home",(req,res)=>{
-
-})
+const PORT = process.env.PORT || 5000;
 
 
-app.listen(process.env.PORT,()=>{
+const connectDB = require("./connectDB");
+connectDB();
+
+
+const timetable_route = require("./routes/timetable_route.js");
+app.use("/timetable",timetable_route);
+
+
+app.listen(PORT,()=>{
     console.log("Server is running...");
 })
 

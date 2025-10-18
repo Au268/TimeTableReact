@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo1 from '../../assets/logo1.jpg';
+import { Link } from 'react-router-dom';
 const Body = () => {
   return (
     <div className="grid md:grid-cols-2 items-center flex-1 px-8 lg:px-16 py-12 gap-10 justify-between">
@@ -16,13 +17,13 @@ const Body = () => {
 
       <div className="flex justify-center md:justify-start gap-4 mt-6">
  
-      <a href="/timetable/student">
+      <Link to="/timetable/student">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-[#81C784] focus:outline-none transition-all duration-300 ease-in-out hover:bg-[#66BB6A]"
         >
           View TimeTable
         </button>
-      </a>
+      </Link>
 
       <a href="/signin/cr">
         <button 
