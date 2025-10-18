@@ -17,6 +17,8 @@ connectDB();
 const timetable_route = require("./routes/timetable_route.js");
 app.use("/timetable",timetable_route);
 
+const modifyLectureRoute = require("./routes/modifyLectureRoute.js");
+app.use("/modifyLecture",modifyLectureRoute);
 
 app.listen(PORT,()=>{
     console.log("Server is running...");
