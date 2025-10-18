@@ -5,6 +5,8 @@
   --primary-600: #00897B;
   --primary-500: #009688;
   --primary-50: #E0F2F1;
+  --teal-100: #CCFBF1;
+  --line-dark: #00a38c;
 }
 
 
@@ -43,3 +45,8 @@ td.empty {
       text-align: center;
       font-size: 0.85rem;
     }
+
+.glass-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+    }    
