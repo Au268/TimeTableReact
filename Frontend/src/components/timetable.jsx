@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from './timetable/nav'
 import Main from './timetable/main'
 import Table from './timetable/table'
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 
 const Timetable = () => {
   

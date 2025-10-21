@@ -6,7 +6,6 @@ const lectures = require("../model/lectures");
 
 const addClass = async(req,res)=>{
     const {data} = req.body;
-    console.log(data)
     let slot = parseFloat(data.duration)/30;
 
     let timeToCompare = [];

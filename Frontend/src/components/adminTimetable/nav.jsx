@@ -1,6 +1,20 @@
 import React from 'react'
+import logoutAdmin from '../../api/logoutAdminApi';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
+
+ const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    const success = await logoutAdmin();
+    if(success){
+          navigate("/dashboard");
+    }
+
+  };
+
   return (
     <nav className="bg-[var(--primary-600)] text-white px-4 py-3 flex justify-between items-center shadow-md relative">
     <span className="font-semibold text-lg">Admin - SE Timetable</span>
@@ -14,24 +28,24 @@ const Nav = () => {
 
 
     <div className="hidden sm:flex gap-4">
-      <a href="/dashboard"><button className="border border-[var(--primary-600)] bg-[var(--primary-50)] text-[var(--primary-600)] px-4 py-2 rounded-md font-medium
+      <Link to="/dashboard"><button className="border border-[var(--primary-600)] bg-[var(--primary-50)] text-[var(--primary-600)] px-4 py-2 rounded-md font-medium
         hover:bg-[var(--primary-200)] hover:text-[var(--primary-700)] hover:border-[var(--primary-700)]
         transition-colors duration-200">
           Go Back
         </button>
-        </a>
+        </Link>
         <a href="/requestHandler"><button className="border border-[var(--primary-600)] bg-[var(--primary-50)] text-[var(--primary-600)] px-4 py-2 rounded-md font-medium
         hover:bg-[var(--primary-200)] hover:text-[var(--primary-700)] hover:border-[var(--primary-700)]
         transition-colors duration-200">
           Approval Requests
         </button>
       </a>
-      <a href="/logout/admin"><button className="border border-[var(--primary-600)] bg-[var(--primary-50)] text-[var(--primary-600)] px-4 py-2 rounded-md font-medium
+
+      <button onClick={handleLogout} className="border border-[var(--primary-600)] bg-[var(--primary-50)] text-[var(--primary-600)] px-4 py-2 rounded-md font-medium
         hover:bg-[var(--primary-200)] hover:text-[var(--primary-700)] hover:border-[var(--primary-700)]
         transition-colors duration-200">
           Logout
         </button>
-      </a>
     </div>
 
 
