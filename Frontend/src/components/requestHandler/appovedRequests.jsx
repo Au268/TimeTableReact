@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const RequestData = () => {
+
+const ApprovedRequests = () => {
   return (
 
     <div className="max-w-6xl mx-auto mt-6 px-4">
@@ -9,20 +10,20 @@ const RequestData = () => {
         >
             <div className="flex items-center gap-10">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-                Pending Requests
+                Approved Requests
             </h2>
             <span
                 className="bg-[var(--primary-600)] text-white text-xs sm:text-sm px-2 py-1 rounded-full"
             >
                 {/* <%= typeof(pendingRequests)!=="undefined"?pendingRequests.length:0 %>  */}
-                Pending
+                Approved
             </span>
 
             <span
                 className="bg-[var(--danger-600)] text-white text-xs sm:text-sm px-2 py-1 rounded-full"
             >
                 {/* <%= typeof(pendingRequests)!=="undefined"?pendingRequests.length:0 %>  */}
-                Pending
+                Approved
             </span>
             </div>
 
@@ -52,7 +53,7 @@ const RequestData = () => {
 
         </div>
 
-        <section
+    <section
         className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-lg overflow-hidden"
       >
        
@@ -218,11 +219,11 @@ const RequestData = () => {
            
 
         </div>
-     
-        </section>
+        
+      </section>
 
       </div>
   )
 }
 
-export default RequestData;
+export default ApprovedRequests;
