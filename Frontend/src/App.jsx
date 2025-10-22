@@ -8,6 +8,7 @@
   import loginMiddle from './api/loginMiddleApi'
   import IsAuthenticated from './components/checkAuth'
 import CrSignUp from './components/CrSignUp'
+import CrSignIn from './components/CrSignIn'
 
   function App() {
     
@@ -27,7 +28,8 @@ import CrSignUp from './components/CrSignUp'
         </Route>
         
         <Route path="/login/admin" element={<AdminLogin/>} />
-        <Route path="/login/cr" element={<CrSignUp/>} />
+        <Route path="/login/newcr" element={<CrSignUp/>} />
+        <Route path="/login/cr" element={<CrSignIn/>} />
         
       </Routes>
     </BrowserRouter>

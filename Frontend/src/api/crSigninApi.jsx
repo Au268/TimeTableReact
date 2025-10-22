@@ -1,8 +1,7 @@
 import React,{useEffect} from "react";
-import { Navigate } from "react-router-dom";
 
-async function CrSignup(data){
-    const apiUrl = "http://localhost:8082/login/newcr";
+async function CrSignin(data){
+    const apiUrl = "http://localhost:8082/login/cr";
     try{
         const response = await fetch(apiUrl,{
             method:"POST",
@@ -22,4 +21,4 @@ async function CrSignup(data){
     }
 }
 
-export default CrSignup
+export default CrSignin

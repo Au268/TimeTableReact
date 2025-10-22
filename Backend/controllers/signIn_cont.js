@@ -35,58 +35,74 @@ const sendCode = (async () => {
 
 
 
-// const crSignin = async(req,res)=>{
-//     const {rollno,password,remember} = req.body;
-//     const crFound = await cr.findOne({rollno});
+const crSignin = async(req,res)=>{
+    const {rollno,password} = req.body;
+    const crFound = await cr.findOne({rollno});
     
-//     if(crFound && await bcrypt.compare(password,crFound.password)){
-//         if(crFound.approved){
-//             if(remember === "true"){
-//                 req.session.crData = {rollno,password};
-//                 res.redirect("/timetable/student");
-//             }
-//             else{
-//                 res.redirect("/timetable/student");
-//             }
-            
-//         }else{
-//             res.render("./messageScreens/pendingApproval")
-//         }
-        
-//     }else{
-//         res.render("crSignin",{error:"Credentials are wrong"})
-//     }
+    if(crFound && await bcrypt.compare(password,crFound.password)){
+        if(crFound.approved){
+            // if(remember === "true"){
+            //     req.session.crData = {rollno,password};
+            //     res.redirect("/timetable/student");
+            // }
+            // else{
+            //     res.redirect("/timetable/student");
+            // }
 
-// }
+            res.json({
+                status:"success",
+                approved:true
+            })
+            
+        }else{
+            res.json({
+                status:"success",
+                approved:false
+            })
+        }
+        
+    }else{
+        res.json({
+            status:"failure"
+        })
+    }
+
+}
 
 const crSignup = async(req,res)=>{
     let {name,rollno,type,semester,email,password,code} = req.body;
     rollno = rollno.toLowerCase();
     if(code === ""){
     const crFound = await cr.findOne({rollno});
-        if(crFound && crFound.approved === false){
-            console.log("cr Found and approved is false")
-        res.json({
-            status:"failure",
-            found:true,
-            approved:false,
-            code:null
+
+        if(crFound){
+                const comparedPassword = await bcrypt.compare(password,crFound.password)
+                if(!comparedPassword){
+                    return res.json({
+                    status:"invalid"
+                })
+                }
+                else if(crFound.approved === false){
+                return res.json({
+                    status:"failure",
+                    found:true,
+                    approved:false,
+                    code:null
+                })
+            }else if(crFound.approved === true){
+                return res.json({
+                    status:"failure",
+                    found:true,
+                    approved:true,
+                    code:null
         })
-        }else if(crFound && crFound.approved === true){
-            console.log("cr Found and approved is true")
-        res.json({
-            status:"failure",
-            found:true,
-            approved:true,
-            code:null
-        })
-        }else{
+        }
+        }
+        else{
         global.emailToSendCode = email;
         global.code = Math.floor(1000 + Math.random() * 9000);
         sendCode();
-        // global.code = 1122
-        console.log("Code sent")
-        res.json({
+        return res.json({
             status:"failure",
             found:false,
             approved:false,
@@ -107,16 +123,12 @@ const crSignup = async(req,res)=>{
             approved:false
         })
         global.code = null;
-        console.log("Successfully compared")
-        res.json({
+        return res.json({
             status:"success",
             found:false,
             approved:false,
             code:null
         })
-    }else{
-        console.log("Invalid Code")
-        res.json("Invalid Code")
     }
 }
 
@@ -167,4 +179,4 @@ const adminSignin = async(req,res)=>{
 
 }
 
-module.exports = {adminSignin,crSignup};
+module.exports = {adminSignin,crSignup,crSignin};
