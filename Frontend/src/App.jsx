@@ -9,34 +9,35 @@
   import IsAuthenticated from './components/checkAuth'
 import CrSignUp from './components/CrSignUp'
 import CrSignIn from './components/CrSignIn'
+import RequestHandler from './components/RequestHandler'
 
   function App() {
     
     return (
 
-      <BrowserRouter>
-      <Routes>
-        <Route path='/timetable/student' element={<Timetable/>}></Route>
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+    //   <BrowserRouter>
+    //   <Routes>
+    //     <Route path='/timetable/student' element={<Timetable/>}></Route>
+    //     <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    //     <Route path="/dashboard" element={<Dashboard />} />
         
-        <Route path='/timetable/admin' element={
-          <IsAuthenticated>
-          <AdminTimetable />
-        </IsAuthenticated>
-        }>
-        </Route>
+    //     <Route path='/timetable/admin' element={
+    //       <IsAuthenticated>
+    //       <AdminTimetable />
+    //     </IsAuthenticated>
+    //     }>
+    //     </Route>
         
-        <Route path="/login/admin" element={<AdminLogin/>} />
-        <Route path="/login/newcr" element={<CrSignUp/>} />
-        <Route path="/login/cr" element={<CrSignIn/>} />
+    //     <Route path="/login/admin" element={<AdminLogin/>} />
+    //     <Route path="/login/newcr" element={<CrSignUp/>} />
+    //     <Route path="/login/cr" element={<CrSignIn/>} />
         
-      </Routes>
-    </BrowserRouter>
+    //   </Routes>
+    // </BrowserRouter>
 
 
 
-
+<RequestHandler />
 
     )
   }
