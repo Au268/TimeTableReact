@@ -4,7 +4,6 @@ const roomNumber = require("../model/roomNumber");
 const room = require("../model/roomNumber");
 
 
-
 const addClass = async(req,res)=>{
     const {data} = req.body;
     let slot = parseFloat(data.duration)/30;

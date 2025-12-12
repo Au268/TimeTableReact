@@ -4,7 +4,7 @@ const Form = ({setLect,setRoom,day,setDay}) => {
     
       useEffect(() => {
     fetchLectures(setLect, setRoom, day);
-  }, [day]);
+  });
 
   const handleChange=(e)=>{
     setDay(e.target.value)
@@ -12,7 +12,7 @@ const Form = ({setLect,setRoom,day,setDay}) => {
   return (
     <form>
       <div className="mb-6">
-        <label for="daySelect" className="mr-2 font-medium text-gray-700">Select Day:</label>
+        <label htmlFor="daySelect" className="mr-2 font-medium text-gray-700">Select Day:</label>
         <select id="daySelect" name="day" className="px-3 py-2 border rounded-md focus:ring-2 focus:ring-[var(--primary-500)]" onChange={handleChange}>
           <option value="">
             --Select Day--

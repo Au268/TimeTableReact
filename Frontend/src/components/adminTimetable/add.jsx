@@ -30,12 +30,13 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
     async function handleSubmit(e){
     e.preventDefault();
     addLecture(data,closePopup,setLect,setRoom,setError,setSuccess)
+    fetchLectures(setLect, setRoom, day);
   }
 
 
 
     return (
-    <div class=" flex items-center justify-center px-10 py-10 ">
+    <div className=" flex items-center justify-center px-10 py-10 ">
         <div className="w-full max-w-md glass-card p-6 sm:p-8 rounded-lg shadow-[0_4px_15px_rgba(0,151,136,0.15)] hover:shadow-[0_6px_18px_rgba(0,151,136,0.25)] transition-shadow duration-300">
     
             <h2 className="text-xl font-semibold text-[var(--primary-600)] mb-1 text-center">Add New Class</h2>
@@ -43,7 +44,7 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
 
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label for="courseAdd" className="block text-gray-700 font-medium mb-1">Course</label>
+                        <label htmlFor="courseAdd" className="block text-gray-700 font-medium mb-1">Course</label>
                         <input type="text" id="courseAdd" required placeholder="Enter course name" name="subjectName"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-opacity-50 transition duration-200"
                         onChange={handleChange}/>
@@ -51,14 +52,14 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
 
 
                     <div>
-                        <label for="instructorAdd" className="block text-gray-700 font-medium mb-1">Instructor</label>
+                        <label htmlFor="instructorAdd" className="block text-gray-700 font-medium mb-1">Instructor</label>
                         <input type="text" id="instructorAdd" required placeholder="Enter instructor name" name="teacherName"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-opacity-50 transition duration-200"
                         onChange={handleChange}/>
                     </div>
 
                     <div>
-                        <label for="semesterEdit" className="block text-gray-700 font-medium mb-1">Semester</label>
+                        <label htmlFor="semesterEdit" className="block text-gray-700 font-medium mb-1">Semester</label>
 
                         <select name="semester" required id="semesterEdit" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-opacity-50 transition duration-200" value={data.semester} onChange={handleChange}>
                         <option value="1">1</option>
@@ -73,7 +74,7 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
                     </div>
 
                     <div>
-                        <label for="typeEdit" className="block text-gray-700 font-medium mb-1">Type</label>
+                        <label htmlFor="typeEdit" className="block text-gray-700 font-medium mb-1">Type</label>
 
                         <div className="flex items-center gap-2 mb-1">
                             <input type="checkbox" id="multiple" className="accent-[var(--primary-600)] cursor-pointer" onClick={()=>setCheck(prev=>!prev)}/>
@@ -96,7 +97,7 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
                         
                     </div>
 
-                    <label htmlFor="duration" class="block text-gray-700 font-medium mb-1">Duration:</label>
+                    <label htmlFor="duration" className="block text-gray-700 font-medium mb-1">Duration:</label>
                     <select name="duration" required id="durationEdit" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-500)] focus:ring-opacity-50 transition duration-200" value={data.duration} onChange={handleChange}>
                     <option value="60">1 hour</option>
                     <option value="90">1.5 hour</option>

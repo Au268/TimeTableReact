@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logoutAdmin from '../../api/logoutAdminApi';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
+
+     useEffect(() => {
+        const menuBtn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('drawer');
+
+        if (!menuBtn || !drawer) return;
+        
+        const toggleDrawer = () => {
+          drawer.classList.toggle('hidden');
+        };
+
+        // Close drawer if clicking outside
+        const handleClickOutside = (e) => {
+          if (!drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+            drawer.classList.add('hidden');
+          }
+        };
+
+        menuBtn.addEventListener('click', toggleDrawer);
+        document.addEventListener('click', handleClickOutside);
+
+        // ✅ Cleanup event listeners
+        return () => {
+          menuBtn.removeEventListener('click', toggleDrawer);
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, []);
 
  const navigate = useNavigate();
 

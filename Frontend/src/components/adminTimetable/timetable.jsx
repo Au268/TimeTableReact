@@ -60,7 +60,8 @@ const Timetable = ({lect,room,setLect,setRoom,day,setError,setSuccess}) => {
                                         contentStyle={
                                           {
                                             borderRadius:"15px",
-                                            width:"500px"
+                                            width:"500px",
+                                            maxHeight:"800px"
                                           }
                                         } 
                                         

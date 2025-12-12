@@ -15,6 +15,7 @@ import CrSignIn from './components/CrSignIn'
     return (
 
       <BrowserRouter>
+      
       <Routes>
         <Route path='/timetable/student' element={<Timetable/>}></Route>
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

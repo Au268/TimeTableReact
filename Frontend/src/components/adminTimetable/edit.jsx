@@ -37,9 +37,9 @@ const Edit = ({lec,room,closePopup,setLect,setRoom,day,setError,setSuccess}) => 
 
 
   return (
-    <form className='flex justify-center content-center py-10 rounded-2xl' onSubmit={handleSubmit}>
+    <form className='flex justify-center content-center py-10 rounded-2xl max-h-[700px] overflow-auto' onSubmit={handleSubmit}>
       
-      <div className="w-full max-w-md glass-card p-6 sm:p-8 rounded-2xl shadow-[0_4px_15px_rgba(0,151,136,0.15)] hover:shadow-[0_6px_18px_rgba(0,151,136,0.25)] transition-shadow duration-300">
+      <div className="w-full max-w-md glass-card p-6 sm:p-8 rounded-2xl ">
         
         <h2 className="text-xl font-semibold text-[var(--primary-600)] mb-1 text-center">Edit className Details</h2>
         <div className="h-0.5 w-16 bg-[var(--line-dark)] mx-auto mb-6"></div>
