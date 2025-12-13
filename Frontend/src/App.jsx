@@ -1,37 +1,38 @@
-  import './App.css'
-  import Dashboard from './components/dashboard'
-  import Timetable from './components/timetable'
-  import AdminTimetable from './components/adminTimetable'
-  import {BrowserRouter,Routes,Route,Link, Navigate} from 'react-router-dom'
-  import { useEffect, useState } from 'react'
-  import AdminLogin from './components/AdminLogin'
-  import loginMiddle from './api/loginMiddleApi'
-  import IsAuthenticated from './components/checkAuth'
+import './App.css'
+import Dashboard from './components/dashboard'
+import Timetable from './components/timetable'
+import AdminTimetable from './components/adminTimetable'
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import AdminLogin from './components/AdminLogin'
+import loginMiddle from './api/loginMiddleApi'
+import IsAuthenticated from './components/checkAuth'
 import CrSignUp from './components/CrSignUp'
 import CrSignIn from './components/CrSignIn'
+import RequestHandler from './components/RequestHandler'
 
-  function App() {
-    
-    return (
+function App() {
 
-      <BrowserRouter>
-      
+  return (
+
+    <BrowserRouter>
+
       <Routes>
-        <Route path='/timetable/student' element={<Timetable/>}></Route>
+        <Route path='/timetable/student' element={<Timetable />}></Route>
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        
+
         <Route path='/timetable/admin' element={
           <IsAuthenticated>
-          <AdminTimetable />
-        </IsAuthenticated>
+            <AdminTimetable />
+          </IsAuthenticated>
         }>
         </Route>
-        
-        <Route path="/login/admin" element={<AdminLogin/>} />
-        <Route path="/login/newcr" element={<CrSignUp/>} />
-        <Route path="/login/cr" element={<CrSignIn/>} />
-        
+
+        <Route path="/login/admin" element={<AdminLogin />} />
+        <Route path="/login/newcr" element={<CrSignUp />} />
+        <Route path="/login/cr" element={<CrSignIn />} />
+        <Route path="/requestHandler" element={<RequestHandler />} />
       </Routes>
     </BrowserRouter>
 
@@ -39,7 +40,7 @@ import CrSignIn from './components/CrSignIn'
 
 
 
-    )
-  }
+  )
+}
 
-  export default App
+export default App
