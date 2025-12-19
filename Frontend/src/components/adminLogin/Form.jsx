@@ -24,7 +24,6 @@ const Form = () => {
         console.log("function called")
         const result = await AdminLogin(data);
         if(result.status === "success"){
-          
           navigate("/timetable/admin");
         }else {
           alert("Invalid credentials");

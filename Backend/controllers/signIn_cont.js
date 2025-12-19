@@ -38,16 +38,23 @@ const sendCode = (async () => {
 const crSignin = async(req,res)=>{
     const {rollno,password} = req.body;
     const crFound = await cr.findOne({rollno});
-    
+    let age = 2*60*60*1000
     if(crFound && await bcrypt.compare(password,crFound.password)){
         if(crFound.approved){
-            // if(remember === "true"){
-            //     req.session.crData = {rollno,password};
-            //     res.redirect("/timetable/student");
-            // }
-            // else{
-            //     res.redirect("/timetable/student");
-            // }
+            const token = jwt.sign({
+                rollno:rollno
+                },
+                process.env.privateKey,
+                {
+                    expiresIn:"2d"
+                });
+
+                res.cookie("token",token,{
+                    httpOnly:true,
+                    secure: true,
+                    maxAge:age,
+                    sameSite: "none"
+                });
 
             res.json({
                 status:"success",

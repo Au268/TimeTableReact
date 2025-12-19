@@ -12,7 +12,7 @@ const fetchStudentLectures = async (updatedData,setLect,setRoom) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
      const result = await response.json();
-
+    
       setLect(result.data.lect || []);
       setRoom(result.data.room || []);
     

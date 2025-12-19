@@ -9,7 +9,8 @@ const lectureSchema = new mongoose.Schema({
     semester:Number,
     type:[String],
     duration:Number,
-    slots:Number
+    slots:Number,
+    reserved:Boolean
 });
 
 const lectureModel = new mongoose.model("lecture",lectureSchema);

@@ -23,12 +23,17 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path='/timetable/admin' element={
-          <IsAuthenticated>
+          <IsAuthenticated name={"admin"}>
             <AdminTimetable />
           </IsAuthenticated>
         }>
         </Route>
-
+         <Route path='/timetable/cr' element={
+          <IsAuthenticated name={"cr"}>
+            <AdminTimetable />
+          </IsAuthenticated>
+        }>
+        </Route>
         <Route path="/login/admin" element={<AdminLogin />} />
         <Route path="/login/newcr" element={<CrSignUp />} />
         <Route path="/login/cr" element={<CrSignIn />} />

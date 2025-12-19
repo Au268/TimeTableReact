@@ -1,27 +1,37 @@
-import React,{useEffect} from "react";
-import { replace, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import loginMiddle from "../api/loginMiddleApi";
 
-export default function IsAuthenticated({children}){
-    
-    
+export default function IsAuthenticated({ children, name }) {
     const navigate = useNavigate();
-    
-    useEffect(()=>{
-        const check = async ()=>{
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const checkAuth = async () => {
             try {
-                 let userIsAuthenticated = await loginMiddle();
-                if(!userIsAuthenticated.authentication){
-                navigate("/login/admin",{replace:true})
-            }
+                const result = await loginMiddle();
+
+                if (!result.authentication) {
+                    if (name === "admin") {
+                        navigate("/login/admin", { replace: true });
+                    } else if (name === "cr") {
+                        navigate("/login/cr", { replace: true });
+                    }
+                } else {
+                    setLoading(false);
+                }
             } catch (error) {
-                 console.error("Error checking auth:", error);
-                  navigate("/login/admin");
+                console.error("Auth check failed:", error);
+                navigate("/login/admin", { replace: true });
             }
-        }
-        check();
-       
-    },[navigate])
-    
+        };
+
+        checkAuth();
+    }, [navigate, name]);
+
+    if (loading) {
+        return <div>Checking authentication...</div>;
+    }
+
     return children;
 }

@@ -16,7 +16,7 @@ const Form = () => {
   const [data,setData]=React.useState({
     name:"",
     rollno:"",
-    type:"",
+    type:"R",
     semester:1,
     email:"",
     password:"",

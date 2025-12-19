@@ -38,6 +38,12 @@ app.use("/checkauth",checkAuth);
 const logout_route = require("./routes/logout_route");
 app.use("/logout",logout_route);
 
+const cr_route = require("./routes/cr_route.js");
+app.use("/cr",cr_route);
+
+const requestModified = require("./routes/requestModified_route.js")
+app.use("/request",requestModified)
+
 app.listen(PORT,()=>{
     console.log("Server is running...");
 })

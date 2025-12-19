@@ -29,7 +29,8 @@ const addClass = async(req,res)=>{
         semester:data.semester,
         type:data.type,
         duration:data.duration,
-        slots:slot
+        slots:slot,
+        reserved:data.reserved
     })
      res.json({
                 status:"success",

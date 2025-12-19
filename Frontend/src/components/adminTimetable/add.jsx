@@ -14,18 +14,27 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
         teacherName:"",
         semester:"1",
         type: "R",
+        reserved:false
     })
 
 
-    function handleChange(e){
-        const {name,value,options,multiple} = e.target;
-        if (multiple) {
-            const selectedValues = Array.from(options).filter(opt => opt.selected).map(opt => opt.value);
+    function handleChange(e) {
+        const { name, value, type, checked, options, multiple } = e.target;
+
+        if (type === "checkbox") {
+            setData(prev => ({ ...prev, [name]: checked }));
+        } 
+        else if (multiple) {
+            const selectedValues = Array.from(options)
+            .filter(opt => opt.selected)
+            .map(opt => opt.value);
             setData(prev => ({ ...prev, [name]: selectedValues }));
-        } else {
+        } 
+        else {
             setData(prev => ({ ...prev, [name]: value }));
         }
     }
+
 
     async function handleSubmit(e){
     e.preventDefault();
@@ -105,6 +114,12 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
                     <option value="150">2.5 hour</option>
                     <option value="180">3 hour</option>
                     </select>
+                    
+                    <div className="flex items-center gap-2 mb-1">
+                        <input type="checkbox" name="reserved" id="reserved" className="accent-[var(--primary-600)] cursor-pointer" value={data.reserved} onChange={handleChange}/>
+                        <span className="text-sm text-gray-600">Reserved</span>
+                    </div>
+                    
                                           
 
                     

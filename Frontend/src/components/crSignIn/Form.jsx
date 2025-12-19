@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import CrSignin from '../../api/crSigninApi'
 import HandleSignInSubmit from './handleSubmit'
-
+import { useNavigate } from 'react-router-dom';
 const Form = () => {
-
+const navigate = useNavigate();
   const [data,setData] = useState({
     rollno:"",
     password:""
@@ -19,7 +19,7 @@ const Form = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    HandleSignInSubmit(data);
+    HandleSignInSubmit(data,navigate);
   }
 
 

@@ -25,7 +25,7 @@ const Body = () => {
         </button>
       </Link>
 
-      <a href="/login/newcr">
+      <a href="/timetable/cr">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-[#009688] focus:outline-none transition-all duration-300 ease-in-out hover:bg-[#00796B]"
         >
