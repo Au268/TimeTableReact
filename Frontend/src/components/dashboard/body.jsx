@@ -1,5 +1,8 @@
 import React from 'react'
 import Logo1 from '../../assets/logo1.jpg';
+import Logo2 from '../../assets/logo2.jpeg';
+import Logo3 from '../../assets/logo3.jpeg';
+import { Link } from 'react-router-dom';
 const Body = () => {
   return (
     <div className="grid md:grid-cols-2 items-center flex-1 px-8 lg:px-16 py-12 gap-10 justify-between">
@@ -16,29 +19,30 @@ const Body = () => {
 
       <div className="flex justify-center md:justify-start gap-4 mt-6">
  
-      <a href="/timetable/student">
+      <Link to="/timetable/student">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-[#81C784] focus:outline-none transition-all duration-300 ease-in-out hover:bg-[#66BB6A]"
         >
           View TimeTable
         </button>
-      </a>
+      </Link>
 
-      <a href="/signin/cr">
+      <a href="/timetable/cr">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-[#009688] focus:outline-none transition-all duration-300 ease-in-out hover:bg-[#00796B]"
         >
           Login as CR / GR
         </button>
       </a>
+  
 
-      <a href="/signin/admin">
+      <Link to="/timetable/admin">
         <button 
           className="soft-btn px-5 py-2.5 rounded-lg text-white bg-gray-800 focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-700"
         >
           Login as Admin
         </button>
-      </a>
+      </Link>
     </div>
 
     </div>
@@ -55,8 +59,8 @@ const Body = () => {
 
         <div className="absolute bottom-6 left-6 bg-white shadow px-3 py-1 rounded-full flex items-center gap-2 text-sm font-medium">
           <div className="flex -space-x-2">
-            <img src="/res/images/pic1.jpg" className="w-6 h-6 rounded-full border" alt="" />
-            <img src="/res/images/pic2.jpg" className="w-6 h-6 rounded-full border" alt="" />
+            <img src={Logo2} className="w-6 h-6 rounded-full border" alt="" />
+            <img src={Logo3} className="w-6 h-6 rounded-full border" alt="" />
           </div>
           Academic Block
         </div>
