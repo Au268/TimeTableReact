@@ -8,7 +8,6 @@ app.use(cookie());
 
 const login_middleware = (req,res)=>{
     const token = req.cookies?.token;
-    console.log("Api Called")
     if(!token){
         return res.json({
             authentication:false
@@ -22,9 +21,18 @@ const login_middleware = (req,res)=>{
             }
 
             req.user = decoded;
-            return res.json({
-            authentication:true
-            })
+            if(req.user.roll === "Cr"){
+                return res.json({
+                    authentication:true,
+                    role:"Cr"
+                })
+            }else if(req.user.roll === "Admin"){
+                return res.json({
+                    authentication:true,
+                    role:"Admin"
+                })
+            }
+            
         })
 
 }

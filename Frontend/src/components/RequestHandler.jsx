@@ -20,7 +20,7 @@ const RequestHandler = () => {
     return (
         <div>
             <Nav />
-            <SubNavBar />
+            {/* <SubNavBar /> */}
             <RequestData data = {data} />
         </div>
     )

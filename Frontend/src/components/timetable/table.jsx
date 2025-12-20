@@ -5,8 +5,7 @@ import { useEffect } from 'react'
 
 const Table = ({lect,room}) => {
     const [searchTerm, setSearchTerm] = useState("");
-    const filteredLect = searchTerm
-    ? lect.filter(l =>
+    const filteredLect = searchTerm? lect.filter(l =>
         l.teacherName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         l.subjectName.toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -50,29 +49,38 @@ const Table = ({lect,room}) => {
                     let cells = []
                      for(let time=8,i=0;i<20;time+=0.5,i++){
                         const lec = filteredLect.find(l => l.time === time && l.roomNumber === rm.name);
-                        if(lec){
-
-                            console.log("Reserved value:", lec.reserved, typeof lec.reserved)
+                        if(lec && lec.reserved){
 
                             cells.push(
-                                <td className="border-1 border-gray-200 px-2 sm:px-3 py-2 font-medium text-center" key={i} colSpan={lec.slots}>
+
+                                  <td className="border px-2 sm:px-3 py-2 text-center bg-teal-50 border-teal-500 font-semibold text-teal-900" key={i} colSpan={lec.slots}>
+                                    {lec.subjectName}
+                                    <br/>
+                                    <span className="text-teal-700 text-[0.65rem] sm:text-xs">
+                                    {lec.teacherName}
+                                    </span>
+                                    <br />
+                                    <span className='text-red-500 text-xs'>
+                                    Reserved
+                                    </span>                                 
+                                    <br/>
+                                  </td>
+                            )
+                            i+= lec.slots-1
+                            time += parseFloat(0.5*(lec.slots-1))
+                        }else if(lec && !lec.reserved){
+                          cells.push(
+
+                                  <td className="border-1 border-gray-200 px-2 sm:px-3 py-2 font-medium text-center" key={i} colSpan={lec.slots}>
                                     {lec.subjectName}
                                     <br/>
                                     <span className="text-gray-500 text-[0.65rem] sm:text-xs">
                                     {lec.teacherName}
                                     </span>
-                                    
-                                    {lec.reserved && (
-                                      <>
-                                        <br />
-                                        <span className="text-red-600 font-semibold text-[0.65rem] sm:text-xs">
-                                          Reserved
-                                        </span>
-                                      </>
-                                    )}
-                                                                        
+                                                                     
                                     <br/>
-                                </td>
+                                  </td>
+                                
                             )
                             i+= lec.slots-1
                             time += parseFloat(0.5*(lec.slots-1))

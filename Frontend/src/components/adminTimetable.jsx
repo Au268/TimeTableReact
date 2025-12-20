@@ -49,7 +49,9 @@ const AdminTimetable = () => {
         <Nav/>
         <div className="max-w-6xl mx-auto px-4 py-6">
             <Form setLect={setLect} setRoom={setRoom} day={day} setDay={setDay}/>
+            {lect.length===0?"":
             <Timetable lect={lect} room={room} setLect={setLect} setRoom={setRoom} day={day} setError={setError} setSuccess={setSuccess}/>
+            }
            
          
           <ToastContainer 

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import fetchLectures from '../../api/fetchAdminLectureApi'
 import addLecture from '../../api/addLectureApi'
+import loginMiddle from '../../api/loginMiddleApi'
 
 const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => {
 
     const [check,setCheck]=useState(false)
+    const [role,setRole] = useState("")
     const [data,setData]=useState({
         day:day || "",
         time:time || "",
@@ -17,6 +19,18 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
         reserved:false
     })
 
+      useEffect(() => {
+        const  getRole = async()=>{
+            const result = await loginMiddle()
+            setRole(result.role)
+            setData(prev => ({
+                ...prev,
+                reserved: result.role === "Cr" ? true : prev.reserved
+            }));
+        }
+        getRole()
+        
+        }, []);
 
     function handleChange(e) {
         const { name, value, type, checked, options, multiple } = e.target;
@@ -115,10 +129,19 @@ const Add = ({room,closePopup,setLect,setRoom,day,time,setError,setSuccess}) => 
                     <option value="180">3 hour</option>
                     </select>
                     
-                    <div className="flex items-center gap-2 mb-1">
-                        <input type="checkbox" name="reserved" id="reserved" className="accent-[var(--primary-600)] cursor-pointer" value={data.reserved} onChange={handleChange}/>
-                        <span className="text-sm text-gray-600">Reserved</span>
-                    </div>
+                    {role==="Admin" && (
+                        <div className="flex items-center gap-2 mb-1">
+                            <input type="checkbox" name="reserved" id="reserved" className="accent-[var(--primary-600)] cursor-pointer" value={data.reserved} onChange={handleChange}/>
+                            <span className="text-sm text-gray-600">Reserved</span>
+                        </div>
+                    )}
+                    {role === "Cr" && (
+                        <div className="flex items-center gap-2 mb-1">
+                            <input type="checkbox" name="reserved" id="reserved" className="accent-[var(--primary-600)] cursor-pointer" checked={true} disabled   />
+                            <span className="text-sm text-gray-600">Reserved</span>
+                        </div>
+                    )}
+
                     
                                           
 

@@ -42,7 +42,7 @@ const crSignin = async(req,res)=>{
     if(crFound && await bcrypt.compare(password,crFound.password)){
         if(crFound.approved){
             const token = jwt.sign({
-                rollno:rollno
+                roll:"Cr"
                 },
                 process.env.privateKey,
                 {
@@ -158,7 +158,7 @@ const adminSignin = async(req,res)=>{
     });
     if(matchedUser.length>0){
          const token = jwt.sign({
-        username:username
+        roll:"Admin"
         },
         process.env.privateKey,
         {

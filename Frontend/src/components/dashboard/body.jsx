@@ -1,5 +1,7 @@
 import React from 'react'
 import Logo1 from '../../assets/logo1.jpg';
+import Logo2 from '../../assets/logo2.jpeg';
+import Logo3 from '../../assets/logo3.jpeg';
 import { Link } from 'react-router-dom';
 const Body = () => {
   return (
@@ -57,8 +59,8 @@ const Body = () => {
 
         <div className="absolute bottom-6 left-6 bg-white shadow px-3 py-1 rounded-full flex items-center gap-2 text-sm font-medium">
           <div className="flex -space-x-2">
-            <img src="/res/images/pic1.jpg" className="w-6 h-6 rounded-full border" alt="" />
-            <img src="/res/images/pic2.jpg" className="w-6 h-6 rounded-full border" alt="" />
+            <img src={Logo2} className="w-6 h-6 rounded-full border" alt="" />
+            <img src={Logo3} className="w-6 h-6 rounded-full border" alt="" />
           </div>
           Academic Block
         </div>
