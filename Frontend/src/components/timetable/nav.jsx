@@ -70,20 +70,15 @@ const Nav = () => {
       {/* Mobile Drawer */}
       <div
         ref={drawerRef}
-        className={`absolute top-full right-0 w-48 bg-white text-[var(--primary-600)] shadow-md rounded-md mt-1 p-2 flex-col gap-2 ${
-          isOpen ? "flex" : "hidden"
-        }`}
+        className={`absolute top-full right-0 w-48 bg-white text-[var(--primary-600)] shadow-md rounded-md mt-1 p-2 flex-col gap-2 ${isOpen ? "flex" : "hidden"
+          }`}
       >
         <a href="/dashboard">
           <button className="w-full text-left px-4 py-2 rounded hover:bg-[var(--primary-50)]">
             Go Back
           </button>
         </a>
-        {/* <a href="logout/student">
-          <button className="w-full text-left px-4 py-2 rounded hover:bg-[var(--primary-50)]">
-            Logout
-          </button>
-        </a> */}
+
       </div>
     </nav>
   );

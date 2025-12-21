@@ -8,11 +8,11 @@ const bcrypt = require("bcrypt");
 
 const transporter = require("../transporter");
 const sendCode = (async () => {
-  const info = await transporter.sendMail({
-    from: 'ubaid.sgd321@gmail.com',
-    to: global.emailToSendCode,
-    subject: "Account Verification Code",
-   text: `
+    const info = await transporter.sendMail({
+        from: 'ubaid.sgd321@gmail.com',
+        to: global.emailToSendCode,
+        subject: "Account Verification Code",
+        text: `
         Dear User,
 
         Thank you for registering with the Department of Software Engineering, University of Sargodha.
@@ -28,162 +28,166 @@ const sendCode = (async () => {
         Department of Software Engineering
         University of Sargodha
     `
-  });
+    });
 
-  console.log("Message sent:", info.messageId);
+    console.log("Message sent:", info.messageId);
 });
 
 
 
-const crSignin = async(req,res)=>{
-    const {rollno,password} = req.body;
-    const crFound = await cr.findOne({rollno});
-    let age = 2*60*60*1000
-    if(crFound && await bcrypt.compare(password,crFound.password)){
-        if(crFound.approved){
+const crSignin = async (req, res) => {
+    const { rollno, password } = req.body;
+    const rollNoSmall = rollno.toLowerCase();
+
+    const crFound = await cr.findOne({ rollno: rollNoSmall });
+    let age = 2 * 60 * 60 * 1000
+    console.log(crFound);
+
+    if (crFound && await bcrypt.compare(password, crFound.password)) {
+        if (crFound.approved) {
             const token = jwt.sign({
-                roll:"Cr"
-                },
+                roll: "Cr"
+            },
                 process.env.privateKey,
                 {
-                    expiresIn:"2d"
+                    expiresIn: "2d"
                 });
 
-                res.cookie("token",token,{
-                    httpOnly:true,
-                    secure: true,
-                    maxAge:age,
-                    sameSite: "none"
-                });
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: true,
+                maxAge: age,
+                sameSite: "none"
+            });
 
             res.json({
-                status:"success",
-                approved:true
+                status: "success",
+                approved: true
             })
-            
-        }else{
+
+        } else {
             res.json({
-                status:"success",
-                approved:false
+                status: "success",
+                approved: false
             })
         }
-        
-    }else{
+
+    } else {
         res.json({
-            status:"failure"
+            status: "failure"
         })
     }
 
 }
 
-const crSignup = async(req,res)=>{
-    let {name,rollno,type,semester,email,password,code} = req.body;
+const crSignup = async (req, res) => {
+    let { name, rollno, type, semester, email, password, code } = req.body;
     rollno = rollno.toLowerCase();
-    if(code === ""){
-    const crFound = await cr.findOne({rollno});
+    if (code === "") {
+        const crFound = await cr.findOne({ rollno });
 
-        if(crFound){
-                const comparedPassword = await bcrypt.compare(password,crFound.password)
-                if(!comparedPassword){
-                    return res.json({
-                    status:"invalid"
-                })
-                }
-                else if(crFound.approved === false){
+        if (crFound) {
+            const comparedPassword = await bcrypt.compare(password, crFound.password)
+            if (!comparedPassword) {
                 return res.json({
-                    status:"failure",
-                    found:true,
-                    approved:false,
-                    code:null
+                    status: "invalid"
                 })
-            }else if(crFound.approved === true){
+            }
+            else if (crFound.approved === false) {
                 return res.json({
-                    status:"failure",
-                    found:true,
-                    approved:true,
-                    code:null
-        })
+                    status: "failure",
+                    found: true,
+                    approved: false,
+                    code: null
+                })
+            } else if (crFound.approved === true) {
+                return res.json({
+                    status: "failure",
+                    found: true,
+                    approved: true,
+                    code: null
+                })
+            }
         }
-        }
-        else{
-        global.emailToSendCode = email;
-        global.code = Math.floor(1000 + Math.random() * 9000);
-        sendCode();
-        return res.json({
-            status:"failure",
-            found:false,
-            approved:false,
-            code:global.code
-        })
+        else {
+            global.emailToSendCode = email;
+            global.code = Math.floor(1000 + Math.random() * 9000);
+            sendCode();
+            return res.json({
+                status: "failure",
+                found: false,
+                approved: false,
+                code: global.code
+            })
         }
     }
-    else if(code == global.code){
-        
-        const encryptedPassword = await bcrypt.hash(password,10);
+    else if (code == global.code) {
+
+        const encryptedPassword = await bcrypt.hash(password, 10);
         const newcr = await cr.insertOne({
             name,
             rollno,
             type,
             semester,
             email,
-            password:encryptedPassword,
-            approved:false
+            password: encryptedPassword,
+            approved: false
         })
         global.code = null;
         return res.json({
-            status:"success",
-            found:false,
-            approved:false,
-            code:null
+            status: "success",
+            found: false,
+            approved: false,
+            code: null
         })
     }
 }
 
 
 
-const adminSignin = async(req,res)=>{
-    const {username,password,remember} = req.body;
+const adminSignin = async (req, res) => {
+    const { username, password, remember } = req.body;
     console.log("Api fetched")
     let age = 0;
-    if(remember==="true"){
-        age = 24*60*60*1000 
+    if (remember === "true") {
+        age = 24 * 60 * 60 * 1000
     }
-    else{
-        age = 2*60*60*1000  
+    else {
+        age = 2 * 60 * 60 * 1000
     }
     let matchedUser = null;
     matchedUser = await user.find({
-        username:username,
-        password:password
+        username: username,
+        password: password
     });
-    if(matchedUser.length>0){
-         const token = jwt.sign({
-        roll:"Admin"
+    if (matchedUser.length > 0) {
+        const token = jwt.sign({
+            roll: "Admin"
         },
-        process.env.privateKey,
-        {
-            expiresIn:"2d"
-        });
+            process.env.privateKey,
+            {
+                expiresIn: "2d"
+            });
 
-        res.cookie("token",token,{
-            httpOnly:true,
+        res.cookie("token", token, {
+            httpOnly: true,
             secure: true,
-            maxAge:age,
+            maxAge: age,
             sameSite: "none"
         });
         res.json({
-            status:"success"
+            status: "success"
         })
 
-        
+
     }
-    else{
+    else {
         res.json({
-            status:"failed"
+            status: "failed"
         })
     }
 
 
 }
 
-module.exports = {adminSignin,crSignup,crSignin};
+module.exports = { adminSignin, crSignup, crSignin };
